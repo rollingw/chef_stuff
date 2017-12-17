@@ -9,14 +9,9 @@ package 'tree' do
   action :install
 end
 
-file '/etc/mot' do
-  owner 'root'
-  group 'root'
-  content "This server is the property of ....
-  HOSTNAME: #{node['hostname']}
-  IPADDRESS: #{node['ipaddress']}
-  CPU: #{node['cpu']['mhz']}
-  MEMORY: #{node['memory']['total']}"
+template '/etc/motd' do
+  source 'motd.erb'
+  action :create
 end
 
 package 'git' do
